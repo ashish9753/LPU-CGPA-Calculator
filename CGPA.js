@@ -1,3 +1,26 @@
+// Theme Toggle Functionality
+function initializeTheme() {
+    const themeToggle = document.getElementById('themeToggle');
+    const htmlElement = document.documentElement;
+    
+    // Check if user has a saved theme preference or default to light mode
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    
+    if (savedTheme === 'dark') {
+        htmlElement.classList.add('dark');
+    } else {
+        htmlElement.classList.remove('dark');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+        htmlElement.classList.toggle('dark');
+        
+        // Save theme preference
+        const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+        localStorage.setItem('theme', currentTheme);
+    });
+}
+
 // Toggle CGPA option
 function toggleCGPAOption() {
     const option = document.getElementById("cgpaOption").value;
@@ -44,6 +67,16 @@ const semesterCredits = {
         { subject: "Subject 6", credits: 2 },
         { subject: "Subject 7", credits: 4 },
         { subject: "Subject 8", credits: 3 }
+    ],
+    "4": [
+        { subject: "Subject 1", credits: 4 },
+        { subject: "Subject 2", credits: 3 },
+        { subject: "Subject 3", credits: 1 },
+        { subject: "Subject 4", credits: 3 },
+        { subject: "Subject 5", credits: 3 },
+        { subject: "Subject 6", credits: 3 },
+        { subject: "Subject 7", credits: 4 },
+        { subject: "Subject 8", credits: 3 }
     ]
 };
 
@@ -56,15 +89,15 @@ function loadSemesterCredits() {
         
         semesterCredits[semester].forEach((subject, index) => {
             const row = document.createElement("tr");
-            row.className = index % 2 === 0 ? "bg-white" : "bg-gray-50";
+            row.className = index % 2 === 0 ? "bg-white dark:bg-gray-800" : "bg-gray-50 dark:bg-gray-700";
             row.innerHTML = `
-                <td class="p-3 border border-gray-200">${subject.subject}</td>
-                <td class="p-3 border border-gray-200">
+                <td class="p-3 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-200">${subject.subject}</td>
+                <td class="p-3 border border-gray-200 dark:border-gray-600">
                     <input type="number" id="credit_${index}" value="${subject.credits}" readonly 
-                    class="w-full p-2 border border-gray-300 rounded-md bg-gray-100">
+                    class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-100 dark:bg-gray-600 text-gray-800 dark:text-gray-200">
                 </td>
-                <td class="p-3 border border-gray-200">
-                    <select id="grade_${index}" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+                <td class="p-3 border border-gray-200 dark:border-gray-600">
+                    <select id="grade_${index}" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                         <option value="">Select Grade</option>
                         <option value="10">O</option>
                         <option value="9">A+</option>
@@ -90,15 +123,15 @@ function generateSubjectInputs() {
     
     for (let i = 0; i < count; i++) {
         const row = document.createElement("tr");
-        row.className = i % 2 === 0 ? "bg-white" : "bg-gray-50";
+        row.className = i % 2 === 0 ? "bg-white dark:bg-gray-800" : "bg-gray-50 dark:bg-gray-700";
         row.innerHTML = `
-            <td class="p-3 border border-gray-200">Subject ${i + 1}</td>
-            <td class="p-3 border border-gray-200">
+            <td class="p-3 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-200">Subject ${i + 1}</td>
+            <td class="p-3 border border-gray-200 dark:border-gray-600">
                 <input type="number" id="credit_${i}" min="1" max="10" value="4"
-                class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+                class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">
             </td>
-            <td class="p-3 border border-gray-200">
-                <select id="grade_${i}" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+            <td class="p-3 border border-gray-200 dark:border-gray-600">
+                <select id="grade_${i}" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                     <option value="">Select Grade</option>
                     <option value="10">O</option>
                     <option value="9">A+</option>
@@ -180,13 +213,13 @@ function calculateCGPA() {
     
     detailsRows.forEach((row, index) => {
         const tr = document.createElement("tr");
-        tr.className = index % 2 === 0 ? "bg-white" : "bg-gray-50";
+        tr.className = index % 2 === 0 ? "bg-white dark:bg-gray-800" : "bg-gray-50 dark:bg-gray-700";
         tr.innerHTML = `
-            <td class="p-3 border border-gray-200">${row.subject}</td>
-            <td class="p-3 border border-gray-200">${row.credits}</td>
-            <td class="p-3 border border-gray-200">${row.grade}</td>
-            <td class="p-3 border border-gray-200">${row.gradePoint}</td>
-            <td class="p-3 border border-gray-200">${row.weightedGP}</td>
+            <td class="p-3 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-200">${row.subject}</td>
+            <td class="p-3 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-200">${row.credits}</td>
+            <td class="p-3 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-200">${row.grade}</td>
+            <td class="p-3 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-200">${row.gradePoint}</td>
+            <td class="p-3 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-200">${row.weightedGP}</td>
         `;
         tbody.appendChild(tr);
     });
@@ -226,6 +259,9 @@ function resetCGPACalculator() {
 
 // Initialize the page
 window.onload = function() {
+    // Initialize theme
+    initializeTheme();
+    
     // Default to "Auto Fill" option
     document.getElementById("cgpaOption").value = "auto";
     
