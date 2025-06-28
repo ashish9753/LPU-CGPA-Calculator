@@ -1,4 +1,17 @@
 // Theme Toggle Functionality
+    window.addEventListener('load', function() {
+        const alertBox = document.getElementById('custom-alert');
+        const closeBtn = document.getElementById('close-btn');
+        
+        alertBox.classList.remove('hidden');
+        
+        closeBtn.addEventListener('click', () => {
+            alertBox.classList.add('animate-fade-out');
+            setTimeout(() => {
+                alertBox.classList.add('hidden');
+            }, 300);
+        });
+    });
 function initializeTheme() {
     const themeToggle = document.getElementById('themeToggle');
     const htmlElement = document.documentElement;
