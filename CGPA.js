@@ -92,13 +92,13 @@ const semesterCredits = {
         { subject: "Subject 8", credits: 3 }
     ],
     "5": [
-        { subject: "Subject 1", credits: 4 },
-        { subject: "Subject 2", credits: 2 },
+        { subject: "Subject 1", credits: 3 },
+        { subject: "Subject 2", credits: 3 },
         { subject: "Subject 3", credits: 3 },
         { subject: "Subject 4", credits: 3 },
         { subject: "Subject 5", credits: 3 },
-        { subject: "Subject 6", credits: 4 },
-        { subject: "Subject 7", credits: 3 }
+        { subject: "Subject 6", credits: 3 },
+        { subject: "Subject 7", credits: 4 }
     ]
 };
 
